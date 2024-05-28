@@ -1,7 +1,7 @@
 %Definition of IDC parameters
 clear
 l = 5e-3;           %overlapping finger length
-n = 6;               %number of IDC finger pairs
+n = 6;              %number of IDC finger pairs
 b = 0.3e-3;         %finger width;
 d = 0.3e-3;         %finger spacings;
 
@@ -21,8 +21,7 @@ lambda = 2*(b + d);
 % a value smaller than 1e-5;
 % -to neglect the Third layer (C3) put the sum (h2+h3) to
 % a value smaller than 2e-5;
-% -C2 is always ZERO when eps2==eps1 (second layer fuses 
-% with the third layer).
+
 
 %% Calculation of IDC Capacitance using Kim Model
 

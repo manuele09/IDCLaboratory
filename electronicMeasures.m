@@ -1,4 +1,6 @@
 load ./Data/elettronica.mat
+% At each row of variable elettronica corresponds
+% a capacitance value. Each capacitance value has 5 readings.
 index = elettronica(:, 1);
 cap_val = elettronica(:, 2);
 [val, ind] = sort(cap_val, "ascend");
@@ -8,7 +10,7 @@ cap_val = cap_val(ind, :);
 volt = volt';
 
 volt_mean = mean(volt);
-volt = volt - volt_mean(1);
+volt = volt - volt_mean(1); %To remove the offset at [0, 0]
 volt_std = std(volt);
 m = mean(volt_mean);
 volt_std_perc = 100*volt_std/m;
@@ -42,7 +44,6 @@ for i=1:1:11
         counter = counter + 1;
     end
 end
-%%
 
 fig = figure('units','normalized','outerposition',[0 0 1 1]);
 for i=1:1:5*11
@@ -50,9 +51,12 @@ for i=1:1:5*11
     hold on
 end
 % plot(cap_vec, volt_vec, "x", "MarkerSize", 10, "LineWidth", 5, "HandleVisibility","off");
+
+% Model Fitting
 linearModelThroughOrigin = fittype('a*x', 'independent', 'x', 'coefficients', 'a');
 % fitResult = fit(cap_vec, volt_vec, 'poly1');
 fitResult = fit(cap_vec, volt_vec, linearModelThroughOrigin);
+
 hold on
 plot(cap_vec, fitResult(cap_vec), "LineWidth", 2, "DisplayName", "Model", "Color", "red")
 legend("show")
@@ -83,7 +87,6 @@ a = coeffs(1);
 
 % inverseQuadratic = @(y_val) (-b + sqrt(b^2 - 4*a*(c - y_val))) / (2*a); %, ...
                              % (-b - sqrt(b^2 - 4*a*(c - y_val))) / (2*a)];
-inverse = @(y) (y/a);
 figure
 for i=1:1:5*11
     plot(volt_vec(i), cap_vec(i), "x", "MarkerSize", 20, "LineWidth", 2.5, "HandleVisibility","off");
@@ -91,12 +94,12 @@ for i=1:1:5*11
 end
 
 hold on
-plot(volt_vec, inverse(volt_vec), "LineWidth", 2, "DisplayName", "Model", "Color", "red")
+plot(volt_vec, volt_vec/a, "LineWidth", 2, "DisplayName", "Model", "Color", "red")
 legend("show")
 hold on
-plot(volt_vec, inverse(volt_vec) + std_res/a, "-", "LineWidth", 2, "Color", "green", "DisplayName","Uncertainty band")
+plot(volt_vec, volt_vec/a + std_res/a, "-", "LineWidth", 2, "Color", "green", "DisplayName","Uncertainty band")
 hold on
-plot(volt_vec, inverse(volt_vec) - std_res/a,  "-", "LineWidth", 2, "Color", "green", "HandleVisibility", "off")
+plot(volt_vec, volt_vec/a - std_res/a,  "-", "LineWidth", 2, "Color", "green", "HandleVisibility", "off")
 
 % hold on
 % plot(volt_vec, inverse(volt_vec + std_res), ".-", "MarkerSize", 25, "LineWidth", 2, "Color", "black", "DisplayName","Uncertainty band")
