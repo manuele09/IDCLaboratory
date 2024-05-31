@@ -1,5 +1,5 @@
 %% Section 2 of Report
-mkdir ./Figures/idcSimulation
+
 %% Only PET Capacitance (Kim and Matlab model)
 %Definition of IDC parameters (Table 1 and 2)
 clear
@@ -53,7 +53,7 @@ startH = 3e-6;
 stepH = 3e-6;
 endH = lambda;
 
-fig = figure('units','normalized','outerposition',[0 0 1 1]);
+figure
 for newH=startH:stepH:endH
     newC = c_idc3k(eps1,eps2,eps3,h1,newH,h3,b,d,l,n);
     plot(newH / 1e-6, newC/1e-12, ".-", "MarkerSize", 24);
@@ -63,7 +63,6 @@ xlabel("h2 [um]");
 ylabel("Capacitance [pF]");
 % title("Capacitance Sensitivity analisys")
 set(gca,'FontSize',40)
-saveas(fig, "Figures/idcSimulation/h2Sensitivity.png");
 %% Sensitivity with respect to h2 and eps2 (Fig 3)
 startH =  3e-6; 
 stepH = 10e-6;
@@ -73,14 +72,11 @@ startEps = 0.7;
 stepEps = 0.2;
 endEps = 4;
 
-% Vector containing the permettivitys of the second layer
-epsVector = zeros(floor((endEps-startEps)/stepEps), 1);
-% Vector containing the thicknesses of the second layer
-hVector = zeros(floor((endH-startH)/stepH), 1); 
-% Vector containing the obtained Capacitance values (always overwritten)
-capacitanceVector = zeros(floor((endEps-startEps)/stepEps), 1); 
+epsVector = zeros(floor((endEps-startEps)/stepEps), 1); % Vector containing the permettivitys of the second layer
+hVector = zeros(floor((endH-startH)/stepH), 1); % Vector containing the thicknesses of the second layer
+capacitanceVector = zeros(floor((endEps-startEps)/stepEps), 1); % Vector containing the obtained Capacitance values
 
-fig = figure('units','normalized','outerposition',[0 0 1 1]);
+figure
 j = 1;
 for newH=startH:stepH:endH
     hVector(j) = newH; % Save for plotting
@@ -90,9 +86,7 @@ for newH=startH:stepH:endH
         epsVector(i) = newEps; % Save for plotting
         i = i+1;
     end
-    plot(epsVector, capacitanceVector/1e-12, ".-",...
-        "LineWidth",2, "MarkerSize", 24, ...
-        "DisplayName", strcat("h2= ",string(newH*1e3), " mm"));
+    plot(epsVector, capacitanceVector/1e-12, ".-", "MarkerSize", 24, "DisplayName", strcat("h2= ",string(newH*1e3), " mm"));
     hold on
     j = j+1;
 end
@@ -102,6 +96,58 @@ ylabel("Capacitance [pF]");
 % title("Capacitance Sensitivity analisys")
 set(gca,'FontSize',40)
 lgd = legend;
-lgd.FontSize = 15; 
-lgd.NumColumns = 8;
-saveas(fig, "Figures/idcSimulation/h2eps2Sensitivity.png");
+lgd.FontSize = 12; % Set the desired font size for the legend
+
+
+%% Test al variare di h1
+% Questo è solo un mio test personale: anche qui si osserva la saturazione
+figure
+
+startH = 3e-6;
+stepH = 3e-6;
+endH = lambda;
+
+for newH=startH:stepH:endH
+    newC = c_idc3k(eps1,eps2,eps3,newH,h2,h3,b,d,l,n);
+    plot(newH / 1e-6, newC / 1e-12, ".-", "MarkerSize", 24);
+    hold on
+end
+xlabel("h1 [um]");
+ylabel("Capacitance [pF]");
+title("Capacitance Sensitivity analisys")
+fontsize(40, "points")
+%% Test for different thickness and permittivity of the first layer
+figure
+
+startH =  3e-6; 
+stepH = 10e-6;
+endH = 200e-6;
+
+startEps = 0.7;
+stepEps = 0.2;
+endEps = 4;
+
+epsVector = zeros(floor((endEps-startEps)/stepEps), 1); % Vector containing the permettivitys of the second layer
+hVector = zeros(floor((endH-startH)/stepH), 1); % Vector containing the thicknesses of the second layer
+capacitanceVector = zeros(floor((endEps-startEps)/stepEps), 1); % Vector containing the obtained Capacitance values
+
+j = 1;
+for newH=startH:stepH:endH
+    hVector(j) = newH; % Save for plotting
+    i = 1;
+    for newEps=startEps:stepEps:endEps
+        capacitanceVector(i) = c_idc3k(newEps,eps2,eps3,newH,h2,h3,b,d,l,n);
+        epsVector(i) = newEps; % Save for plotting
+        i = i+1;
+    end
+    plot(epsVector, capacitanceVector/1e-12, ".-", "MarkerSize", 24, "DisplayName", strcat("h2= ",string(newH*1e3), " mm"));
+    hold on
+    j = j+1;
+end
+legend("show")
+xlabel("Permittivity [F/m]");
+ylabel("Capacitance [pF]");
+% title("Capacitance Sensitivity analisys")
+set(gca,'FontSize',40)
+lgd = legend;
+lgd.FontSize = 12; % Set the desired font size for the legend

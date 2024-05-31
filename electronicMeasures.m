@@ -1,3 +1,4 @@
+clear
 load ./Data/elettronica.mat
 % At each row of variable elettronica corresponds
 % a capacitance value. Each capacitance value has 5 readings.
@@ -65,8 +66,8 @@ residuals = zeros(5, 11);
 for i=1:1:11
     residuals(:, i) = abs(volt(:, i) - fitResult(cap_val(i)));
 end
-
-std_res = 3*max(std(residuals));
+residuals_vec = reshape(residuals, [55, 1]);
+std_res = 2*max(std(residuals));
 
 % hold on
 % plot(cap_val, fitResult(cap_val) + std_res, "-", "LineWidth", 2, "Color", "green", "DisplayName","Uncertainty band")
@@ -111,4 +112,7 @@ plot(volt_vec, volt_vec/a - std_res/a,  "-", "LineWidth", 2, "Color", "green", "
 xlabel("Voltage (difference) [V]")
 ylabel("Capacitance [pF]")
 % title("Calibration Diagram")
-fontsize(30, "points")
+fontsize(40, "points")
+
+% figure
+% histfit(residuals_vec)
