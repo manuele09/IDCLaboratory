@@ -13,6 +13,7 @@
 % eps1= dielectric permittivity of layer 1;
 % eps2= dielectric permittivity of layer 2;
 % eps3= dielectric permittivity of layer 3;
+% display = true if you want to display all 3 partial capacitances
 
 % OUTPUT PARAMETERS 
 % Cidc= Overall IDC Capacitance [F]

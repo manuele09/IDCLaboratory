@@ -1,18 +1,18 @@
 %% Section 2 of Report
+clear
 mkdir ./Figures/idcSimulation
 %% Only PET Capacitance (Kim and Matlab model)
 %Definition of IDC parameters (Table 1 and 2)
-clear
 l = 5e-3;           %overlapping finger length
 n = 6;              %number of IDC finger pairs
 b = 0.3e-3;         %finger width;
 d = 0.3e-3;         %finger spacings;
 
 h1 = 140e-6;        %layer 1 thickness;
-h2 = 10e-6;          %layer 2 thickness;
-h3 = 10e-6;          %layer 3 thickness;
+h2 = 10e-6;         %layer 2 thickness;
+h3 = 10e-6;         %layer 3 thickness;
 eps1 = 3.5;         %dielectric permittivity of PET (substrate);
-eps2 = 1;        %dielectric permittivity of Polidopamina (sensitive layer);
+eps2 = 1;           %dielectric permittivity of Polidopamina (sensitive layer);
 eps3 = 1;           %dielectric permittivity of layer 3 (MUT);
 lambda = 2*(b + d);
 
@@ -39,13 +39,13 @@ idcObj.Height = 1;
 idcObj.Substrate = dielectric(Name="PET", EpsilonR=eps1, LossTangent=0.00100, Thickness=h1);
 CModel = idcObj.capacitance(20e3);
 disp("Capacitance Only PET (Matlab Model) = " + CModel/1e-12 + "pF");
-disp("The mismatch is: " + string((CKim-CModel)/1e-12) + "pF"); 
+disp("The mismatch is: " + string(abs(CKim-CModel)/1e-12) + "pF"); 
 %% Capacitance with second layer (From now only Kim Model)
 % Parameters in Table 4 (others are unchanged)
 h2=100e-6;
 eps2=1.23;
 
-CKim = c_idc3k(eps1,eps2,eps3,h1,h2,h3,b,d,l,n, true);
+CKim = c_idc3k(eps1,eps2,eps3,h1,h2,h3,b,d,l,n);
 disp("Capacitance With Second Layer: " + CKim/1e-12 + " pF")
 %% Sensitivity with respect to h2 (Fig 2)
 % h2 will vary from StartH to endH, with a step stepH.
