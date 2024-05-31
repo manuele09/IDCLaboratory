@@ -53,6 +53,7 @@ startH = 3e-6;
 stepH = 3e-6;
 endH = lambda;
 
+% Figure 2
 fig = figure('units','normalized','outerposition',[0 0 1 1]);
 for newH=startH:stepH:endH
     newC = c_idc3k(eps1,eps2,eps3,h1,newH,h3,b,d,l,n);
@@ -80,6 +81,7 @@ hVector = zeros(floor((endH-startH)/stepH), 1);
 % Vector containing the obtained Capacitance values (always overwritten)
 capacitanceVector = zeros(floor((endEps-startEps)/stepEps), 1); 
 
+% Figure 3
 fig = figure('units','normalized','outerposition',[0 0 1 1]);
 j = 1;
 for newH=startH:stepH:endH

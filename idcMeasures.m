@@ -140,7 +140,8 @@ xlabel("Measure Iterations")
 set(gca, 'FontSize', 35)
 saveas(fig, "Figures/idcMeasures/bar_capacitance.png");
 
-%% Inkjet printing camera measures (Table 9)
+%% Inkjet printing camera measures
+% Table 9
 disp("Mean inkjet printing camera measures:")
 disp([mean(length_measures.finger_lenght) ...
      mean(length_measures.finger_width) ...

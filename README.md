@@ -31,32 +31,44 @@ This script contains the function `c_idc3k` which calculates the capacitance of 
 
 ### 2. `idcSimulation.m`
 
-This script defines the parameters for simulating the Interdigital Capacitor (IDC) and compares the results with the interdigital model provided by the RF and Mixed Signal MATLAB module.
 **Features:**
-- Calculation of IDC capacitance using the Kim model.
-- Comparison with the interdigital MATLAB model.
-- Sensitivity analysis of the capacitance with respect to variations in layer thickness (`h2`) and permittivity (`eps2`).
-- Plotting the results for visualization.
+- Simulation of an IDC capacitor with a single layer (Pet);
+- Comparison Kim and Interdigital MATLAB model;
+- Sensitivity analysis of the capacitance with respect to variations in layer thickness (`h2`);
+- Sensitivity analysis of the capacitance with respect to variations in both layer thickness (`h2`) and permittivity (`eps2`).
 
-### 3. `bareSensorMeasures.m`
+**This code corrensponds to section 2 of Report**
+| Table Numbers   | Figures Numbers |
+| --------------- | --------------- |
+| From 1 to 4      | 2, 3            |
 
-This script analyzes the resistance and capacitance measurements of various sensor configurations. 
+### 3. `idcMeasures.m`
 
 **Features:**
-- Bar plots for resistance and capacitance (mean and standard deviation).
-- Analysis of sensor measures using inkjet printing camera data.
-- Comparison of capacitance values obtained with set and printed parameters.
-- Finetuning of model's parameters to match the real capacitance values.
+- Point plots for resistance and capacitance;
+- Bar plots for resistance and capacitance (mean and standard deviation);
+- Analysis of sensor measures using inkjet printing camera data;
+- Comparison of capacitance values obtained with set and printed parameters;
+- Finetuning of model's parameters to match the real capacitance values;
 
-### 4. `electronicMeasures.m`
+**This code corrensponds to section 3 of Report**
+| Table Numbers   | Figures Numbers |
+| --------------- | --------------- |
+| From 5 to 9     | From 5 to 10, from 12 to 15 |
 
-This script evaluates the voltage measurements corresponding to different capacitance values from an electronic setup. 
+### 4. `idcConditioning.m`
 
 **Features:**
 - Bar plots for voltage (mean and standard deviation) for different capacitance values.
 - Model fitting.
 - Transduction diagram showing the relationship between capacitance and voltage.
 - Calibration diagram with uncertainty bands.
+
+
+**This code corrensponds to section 3 of Report**
+| Table Numbers   | Figures Numbers |
+| --------------- | --------------- |
+| 10     | From 23 to 25 |
 
 ## Requirements
 
