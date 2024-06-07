@@ -63,12 +63,13 @@ This script contains the function `c_idc3k` which calculates the capacitance of 
 - Model fitting.
 - Transduction diagram showing the relationship between capacitance and voltage.
 - Calibration diagram with uncertainty bands.
+- Residuals Histogram Fitting
 
 
 **This code corrensponds to section 3 of Report**
 | Table Numbers   | Figures Numbers |
 | --------------- | --------------- |
-| 10     | From 23 to 25 |
+| 10     | From 23 to 26 |
 
 ## Requirements
 

@@ -10,15 +10,27 @@ load ./Data/idcMeasures.mat
 % Table 5
 mean_rr = mean(ribbon_ribbon);
 std_rr = std(ribbon_ribbon);
+mean_mean_rr = mean(mean_rr);
+mean_std_rr = mean(std_rr);
+reap_rr = (mean_std_rr/mean_mean_rr)*100;
 % Table 6
 mean_rf = mean(ribbon_finger);
 std_rf = std(ribbon_finger);
+mean_mean_rf = mean(mean_rf);
+mean_std_rf = mean(std_rf);
+reap_rf = (mean_std_rf/mean_mean_rf)*100;
 % Table 7
 mean_ff = mean(finger_finger);
 std_ff = std(finger_finger);
+mean_mean_ff = mean(mean_ff);
+mean_std_ff = mean(std_ff);
+reap_ff = (mean_std_ff/mean_mean_ff)*100;
 % Table 8
 mean_c = mean(capacitances);
 std_c = std(capacitances);
+mean_mean_c = mean(mean_c);
+mean_std_c = mean(std_c);
+reap_c = (mean_std_c/mean_mean_c)*100;
 row_capacitors = reshape(capacitances(:,2:end), 90, 1);
 dStrings = ["Device 1", "Device 2", "Device 3", "Device 4", "Device 5", "Device 6","Device 7", "Device 8", "Device 9", "Device 10"];
 %% Resistance Points Plots

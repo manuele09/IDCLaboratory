@@ -94,3 +94,12 @@ ylabel("Capacitance [pF]")
 % title("Calibration Diagram")
 set(gca,'FontSize',40)
 saveas(fig, "Figures/idcConditioning/calibration.png");
+%%
+% Residuals Histogram Fitting
+% Figure 26
+fig = figure('units','normalized','outerposition',[0 0 1 1]);
+histfit(residuals_vec)
+ylabel("Occurences")
+xlabel("Residuals [V]");
+set(gca,'FontSize',40)
+saveas(fig, "Figures/idcConditioning/histfit.png");
